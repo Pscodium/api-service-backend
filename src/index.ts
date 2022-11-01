@@ -1,8 +1,7 @@
-import * as express from "express"
-import * as bodyParser from "body-parser"
-import { AppDataSource } from "./data-source"
-import routes from "./routes"
-import { User } from "./entity/User"
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import { AppDataSource } from "./data-source";
+import routes from "./routes";
 
 AppDataSource.initialize().then(async () => {
 
@@ -13,6 +12,6 @@ AppDataSource.initialize().then(async () => {
 
     app.listen(3333);
 
-}).catch(error => console.log(error))
+}).catch(error => console.log(error));
 
 

@@ -5,7 +5,7 @@ services:
     container_name: 'mysql_local'
     image: mysql:5.7.31
     restart: always
-    ports: 
+    ports:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -23,6 +23,6 @@ services:
     networks:
       - mysql-compose-network
 
-networks: 
+networks:
   mysql-compose-network:
     driver: bridge
