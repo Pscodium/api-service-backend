@@ -20,6 +20,11 @@ export class Color {
     @Column('simple-array')
         rgb: number[];
 
+    @Column({
+        default: false
+    })
+        isLight: boolean;
+
     @CreateDateColumn()
         createdAt: Date;
 

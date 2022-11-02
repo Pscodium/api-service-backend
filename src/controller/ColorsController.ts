@@ -42,6 +42,24 @@ class ColorController {
         for (let i = 0; i < 5; i++) {
             const pos = Math.floor(Math.random() * colorsLength) + 1;
             const color = await AppDataSource.getRepository(Color).findOne({ where: { id: pos } });
+
+            const r = color.rgb[0];
+            const g = color.rgb[1];
+            const b = color.rgb[2];
+
+            const hsp = Math.sqrt(
+                0.299 * (r * r) +
+                0.587 * (g * g) +
+                0.114 * (b * b)
+            );
+
+            if (hsp>127.5) {
+                color.isLight = true;
+            }
+            else {
+                color.isLight = false;
+            }
+
             randomColors.push(color);
         }
 
