@@ -5,9 +5,9 @@ import { userController } from './controller/UserController';
 
 const routes = Router();
 
-routes.get('/', (req, res) => {
-    return res.json({ message: 'Hello, World!' });
-});
+/**
+ * @User routes
+ */
 
 routes.post('/users', userController.createUser);
 
@@ -18,6 +18,11 @@ routes.get('/users/:id', userController.getUserById);
 routes.delete('/users/:id', userController.deleteUserById);
 
 routes.get('/users/active/:id', userController.activeAccount);
+
+
+/**
+ * @Color routes
+ */
 
 routes.post('/color', colorController.createColor);
 
