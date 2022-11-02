@@ -2,48 +2,53 @@ import { AppDataSource } from "../data-source";
 import { User } from "../entity/User";
 import { Response, Request } from "express";
 
-export const createUser = async (req: Request, res: Response) => {
+class UserController {
 
-    if(req.body.id) {
-        res.json({ message: "You are not allowed to set someone's id"});
-        return res.sendStatus(400);
-    }
+    createUser = async (req: Request, res: Response) => {
 
-    const user = await AppDataSource.getRepository(User).save(req.body);
-    res.json(user);
-};
+        if(req.body.id) {
+            res.json({ message: "You are not allowed to set someone's id"});
+            return res.sendStatus(400);
+        }
 
-export const getUsers = async (req: Request, res: Response) => {
+        const user = await AppDataSource.getRepository(User).save(req.body);
+        res.json(user);
+    };
 
-    const users = await AppDataSource.getRepository(User).find();
+    getUsers = async (req: Request, res: Response) => {
 
-    return res.json(users);
-};
+        const users = await AppDataSource.getRepository(User).find();
 
-export const getUserById = async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
-    const user = await AppDataSource.getRepository(User).findOne({ where: { id: id }});
+        return res.json(users);
+    };
 
-    return res.json(user);
-};
+    getUserById = async (req: Request, res: Response) => {
+        const id = Number(req.params.id);
+        const user = await AppDataSource.getRepository(User).findOne({ where: { id: id }});
 
-export const deleteUserById = async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
-    const user = await AppDataSource.getRepository(User).delete(id);
+        return res.json(user);
+    };
 
-    if (user.affected == 1) {
-        await AppDataSource.getRepository(User).find();
-        return res.json({ message: "User removed successfully!" });
-    }
+    deleteUserById = async (req: Request, res: Response) => {
+        const id = Number(req.params.id);
+        const user = await AppDataSource.getRepository(User).delete(id);
 
-    return res.status(404).json({ message: "User not found" });
-};
+        if (user.affected == 1) {
+            await AppDataSource.getRepository(User).find();
+            return res.json({ message: "User removed successfully!" });
+        }
 
-export const activeAccount = async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
-    const user = await AppDataSource.getRepository(User).update(id, {
-        isActive: true
-    });
+        return res.status(404).json({ message: "User not found" });
+    };
 
-    return res.json(user);
-};
+    activeAccount = async (req: Request, res: Response) => {
+        const id = Number(req.params.id);
+        const user = await AppDataSource.getRepository(User).update(id, {
+            isActive: true
+        });
+
+        return res.json(user);
+    };
+}
+
+export const userController = new UserController();
