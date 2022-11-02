@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { createColor, deleteColorById, getColors, getColorsById } from './controller/ColorsController';
-import { getUsers, getUserById, createUser, deleteUserById, activeAccount } from './controller/UserController';
+import { colorController } from './controller/ColorsController';
+import { userController } from './controller/UserController';
 
 
 const routes = Router();
@@ -9,22 +9,24 @@ routes.get('/', (req, res) => {
     return res.json({ message: 'Hello, World!' });
 });
 
-routes.post('/users', createUser);
+routes.post('/users', userController.createUser);
 
-routes.get('/users', getUsers);
+routes.get('/users', userController.getUsers);
 
-routes.get('/users/:id', getUserById);
+routes.get('/users/:id', userController.getUserById);
 
-routes.delete('/users/:id', deleteUserById);
+routes.delete('/users/:id', userController.deleteUserById);
 
-routes.get('/users/active/:id', activeAccount);
+routes.get('/users/active/:id', userController.activeAccount);
 
-routes.post('/color', createColor);
+routes.post('/color', colorController.createColor);
 
-routes.get('/colors', getColors);
+routes.get('/colors', colorController.getColors);
 
-routes.get('/color/:id', getColorsById);
+routes.get('/color/:id', colorController.getColorsById);
 
-routes.delete('/colors/:id', deleteColorById);
+routes.delete('/colors/:id', colorController.deleteColorById);
+
+routes.get('/colors/random', colorController.getRandomColors);
 
 export default routes;
