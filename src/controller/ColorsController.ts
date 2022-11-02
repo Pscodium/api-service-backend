@@ -4,7 +4,7 @@ import { Response, Request } from "express";
 // import * as colorJson from '../database/colors.json';
 
 class ColorController {
-    
+
     createColor = async (req: Request, res: Response) => {
         const color = await AppDataSource.getRepository(Color).save(req.body);
 
@@ -40,7 +40,7 @@ class ColorController {
         const randomColors = [];
 
         for (let i = 0; i < 5; i++) {
-            const pos = Math.floor(Math.random() * colorsLength);
+            const pos = Math.floor(Math.random() * colorsLength) + 1;
             const color = await AppDataSource.getRepository(Color).findOne({ where: { id: pos } });
             randomColors.push(color);
         }
