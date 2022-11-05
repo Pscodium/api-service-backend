@@ -46,7 +46,7 @@
 
 - Start docker-compose
 ```bash
-  docker-compose-up
+  docker-compose up
 ```
 - Start project
 ```bash
